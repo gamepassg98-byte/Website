@@ -3,15 +3,12 @@ import { list } from '@vercel/blob';
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
 
-  if (req.method !== 'GET') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+  if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
     let allBlobs = [];
     let cursor = undefined;
 
-    // Paginate through all blobs
     do {
       const result = await list({
         prefix: 'clips/',
@@ -22,7 +19,6 @@ export default async function handler(req, res) {
       cursor = result.cursor;
     } while (cursor);
 
-    // Sort newest first
     allBlobs.sort((a, b) => new Date(b.uploadedAt) - new Date(a.uploadedAt));
 
     const videos = allBlobs.map(blob => ({
