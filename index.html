@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#000000">
   <title>ClipVault</title>
   <link rel="stylesheet" href="/style.css">
 </head>
@@ -13,41 +12,39 @@
   <div class="container">
     <header>
       <h1>🎬 ClipVault</h1>
-      <p class="subtitle">Drop your clips. Full quality. No compression.</p>
+      <p class="subtitle">Private Clip Collection</p>
     </header>
 
-    <div class="upload-section">
-      <div class="upload-box" id="dropZone">
-        <div class="upload-icon">📁</div>
-        <p>Drag & drop videos here</p>
-        <p class="small">or tap to browse</p>
-        <input type="file" id="fileInput" accept="video/*" multiple hidden>
-        <button class="btn" onclick="document.getElementById('fileInput').click()">Choose Files</button>
+    <div class="add-section">
+      <input type="text" id="linkInput" placeholder="Paste Google Drive link..." class="input">
+      <input type="text" id="nameInput" placeholder="Clip name..." class="input">
+      <button class="btn" onclick="addClip()">+ Add Clip</button>
+      <div class="sync-row">
+        <button class="btn btn-outline" onclick="exportVault()">📤 Export Sync Code</button>
+        <button class="btn btn-outline" onclick="importVault()">📥 Import Sync Code</button>
       </div>
-      <div id="uploadProgress" class="progress-area"></div>
     </div>
 
     <div class="section-header">
-      <h2>📼 All Clips</h2>
-      <button class="btn btn-small" onclick="loadVideos()">Refresh</button>
+      <h2>📼 My Clips</h2>
+      <span id="clipCount" class="count">0 clips</span>
     </div>
+
     <div id="videoGrid" class="video-grid">
-      <div class="loading">Loading clips...</div>
+      <div class="empty-state">
+        <div>🎬</div>
+        <p>No clips yet. Paste a Google Drive link above!</p>
+      </div>
     </div>
   </div>
 
   <div id="playerModal" class="modal" style="display:none;">
-    <div class="modal-content">
+    <div class="modal-inner">
       <div class="modal-header">
         <button class="btn-close" onclick="closePlayer()">✕</button>
-        <span id="playerTitle" class="modal-title">Video</span>
-        <a id="downloadLink" class="btn-download" download>⬇</a>
+        <span id="playerTitle" class="modal-title"></span>
       </div>
-      <div class="video-wrapper">
-        <video id="videoPlayer" controls playsinline preload="metadata"
-               webkit-playsinline x-webkit-airplay="allow"></video>
-      </div>
-      <div class="modal-info" id="modalInfo"></div>
+      <div id="playerContainer" class="player-container"></div>
     </div>
   </div>
 
