@@ -2,7 +2,14 @@
   "version": 2,
   "functions": {
     "api/upload.js": {
-      "maxDuration": 300
+      "maxDuration": 300,
+      "memory": 1024
+    },
+    "api/videos.js": {
+      "maxDuration": 30
+    },
+    "api/delete.js": {
+      "maxDuration": 30
     }
   }
 }
