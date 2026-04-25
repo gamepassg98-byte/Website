@@ -106,14 +106,12 @@ function uploadFile(file, id) {
         const now = Date.now();
         const timeDiff = (now - lastTime) / 1000;
 
-        // Calculate speed
         let speedText = '';
         if (timeDiff > 0.5) {
           const bytesDiff = e.loaded - lastLoaded;
           const speed = bytesDiff / timeDiff;
           speedText = `⚡ ${formatSize(speed)}/s`;
 
-          // ETA
           const remaining = e.total - e.loaded;
           if (speed > 0) {
             const eta = Math.round(remaining / speed);
