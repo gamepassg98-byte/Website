@@ -1,1 +1,14 @@
-
+{
+  "buildCommand": "",
+  "outputDirectory": "public",
+  "rewrites": [
+    { "source": "/api/upload", "destination": "/api/upload.js" },
+    { "source": "/api/videos", "destination": "/api/videos.js" },
+    { "source": "/api/delete", "destination": "/api/delete.js" }
+  ],
+  "functions": {
+    "api/upload.js": {
+      "maxDuration": 300
+    }
+  }
+}
